@@ -9,27 +9,32 @@ Este documento recopila todas las evidencias y respuestas de la practica.
 ### Fase 1: Instalacion y configuracion
 
 1) Servicio Nginx activo
-- Que demuestra:
-- Comando:
-- Evidencia:
+- Que demuestra: que el contenedor nginx está alzado y que los puertos 8090 y 8443 están mapeados a los puertos del contenedor 80 y 443.
+- Comando: docker ps
+- Evidencia:  
+![Evidencia funcionamiento](evidencias/infraestructura-estado.png)
 
 2) Configuracion cargada
-- Que demuestra:
-- Comando:
-- Evidencia:
+- Que demuestra: verifica que el archivo `default.conf` local se ha montado correctamente dentro del contenedor en `/etc/nginx/conf.d/`.
+- Comando: `docker compose exec web ls -l /etc/nginx/conf.d/`
+- Evidencia:  
+![evidencia de configuracion](evidencias/config-cargada.png)
 
 3) Resolucion de nombres
-- Que demuestra:
-- Evidencia:
+- Que demuestra: Muestra que el navegador es capaz de acceder al servidor web mediante la dirección configurada, `localhost` en este entorno Docker/Windows, y recibir respuesta.
+- Evidencia:  
+![Acceso](evidencias/noseguro.png)
 
 4) Contenido Web
-- Que demuestra:
+- Que demuestra: Confirma que el servidor está sirviendo los archivos HTML/CSS personalizados y no la página de bienvenida por defecto de Nginx.
 - Evidencia:
+![alt text](evidencias/noseguro.png)
+![alt text](evidencias/reloj-funcionando.png)
 
 ### Fase 2: Transferencia SFTP (Filezilla)
 
 5) Conexion SFTP exitosa
-- Que demuestra:
+- Que demuestra: Confirma que el servicio SSH/SFTP está accesible desde el exterior en el puerto no estándar (2223) y que las credenciales configuradas en el `docker-compose.yml` son válidas para establecer la sesión.
 - Evidencia:
 
 6) Permisos de escritura
