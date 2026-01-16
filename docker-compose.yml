@@ -3,18 +3,20 @@ services:
   web:
     image: nginx:latest
     ports:
-      - "8090:80"    # Tu puerto HTTP actual
-      - "8443:443"   # NUEVO: Puerto HTTPS
+      - "8090:80"    # puerto HTTP actual
+      - "8443:443"   # Puerto HTTPS
     volumes:
       
-      - ./html:/usr/share/nginx/html 
+      - ./webdata:/usr/share/nginx/html
       
-      # NUEVO: Inyección del archivo de configuración
+      # Inyección del archivo de configuración
       - ./default.conf:/etc/nginx/conf.d/default.conf
       
-      # NUEVO: Inyección de certificados
+      #Inyección de certificados
       - ./nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt
       - ./nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key
+
+      - ./.htpasswd:/etc/nginx/.htpasswd
     depends_on:
       - sftp-server
 
@@ -23,5 +25,5 @@ services:
     ports:
       - "2223:22"
     volumes:
-      - ./html:/home/user/upload   # <--- ¡Aquí están los dos puntos clave ":"!
-    command: user:1234:1001        # <--- Tu usuario es 'user' y contraseña '1234'
+      - ./webdata:/home/user/upload   
+    command: user:1234:1001        # usuario es 'user' y contraseña '1234'
